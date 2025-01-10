@@ -1,31 +1,41 @@
-import { Divider, List, Typography, message } from "antd";
+import { Button, Divider, List, Typography, Upload } from "antd";
 import { useEffect, useState } from "react";
-import { IPost } from "../../../type";
-import axios from "axios";
+import usePostStore from "../../PostStore/usePostStore";
+import { UploadOutlined } from "@ant-design/icons";
 
 export default function ListItems() {
-  const [posts, setPosts] = useState<IPost[]>([]);
+  const posts = usePostStore((state) => state.posts);
+  const handleGetPosts = usePostStore((state) => state.handleGetPosts);
+
   useEffect(() => {
     handleGetPosts();
-  }, []);
-  async function handleGetPosts() {
-    try {
-      const res = await axios.get<IPost[]>("http://localhost:3001/posts");
-      setPosts(res.data);
-    } catch (error) {
-      message.error("Error with Posts");
-    }
-  }
+  }, [handleGetPosts]);
+
   return (
     <div>
+      <Divider orientation="left">Posts:</Divider>
       <List
         size="small"
         bordered
         dataSource={posts}
         renderItem={(item) => (
           <List.Item>
-            <Typography.Text mark>{item.creator}</Typography.Text>
-            <p>{item.body}</p>
+            <div style={{ textAlign: "center", width: "100%" }}>
+              <Typography.Text strong>{item.creator}</Typography.Text>
+              <p>{item.body}</p>
+
+              {item.image && (
+                <img
+                  src={item.image}
+                  alt="Post"
+                  style={{
+                    maxWidth: "100%",
+                    maxHeight: "200px",
+                    marginTop: "1rem",
+                  }}
+                />
+              )}
+            </div>
           </List.Item>
         )}
       />

@@ -1,14 +1,25 @@
 {
-    "posts": [
-      {
-        "creator":"Abd",
-        "id": 1,
-        "body": "Todays article will demonstrate how to develop a login form in react js using formik."
-      },
-      {
-        "creator":"Asad",
-        "id": 2,
-        "body": "In this article, I will teach you how to parse or read CSV files in ReactJS in the simplest way possible. "
-      }
-    ]
-  }
+  "posts": [
+    {
+      "id": "1f31",
+      "creator": "dasdas",
+      "body": "adsadsdsadasdasdasdasdasdasdsadsadsa",
+      "image": "C:\\fakepath\\2024-12-20 03.25.15.jpg",
+      "updatedAt": "2025-01-05T21:04:19.343Z"
+    },
+    {
+      "id": "6b4d",
+      "creator": "выф",
+      "body": "фвы",
+      "image": "C:\\fakepath\\asad.jpg",
+      "updatedAt": "2025-01-07T01:48:54.908Z"
+    },
+    {
+      "id": "de25",
+      "creator": "ds",
+      "body": "asda",
+      "image": "C:\\fakepath\\pixverse%2Fmp4%2Fmedia%2Fweb%2Feec9ba32-48c5-4335-b6a3-e0f6e2f06789_seed550551851.mp4",
+      "updatedAt": "2025-01-07T02:25:02.116Z"
+    }
+  ]
+}
