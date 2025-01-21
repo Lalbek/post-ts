@@ -1,11 +1,44 @@
-import { Button, Divider, List, Typography, Upload } from "antd";
-import { useEffect, useState } from "react";
+import { Button, Divider, Dropdown, List, Typography } from "antd";
+import { useEffect } from "react";
 import usePostStore from "../../PostStore/usePostStore";
-import { UploadOutlined } from "@ant-design/icons";
+import {
+  DeleteOutlined,
+  EditOutlined,
+  EllipsisOutlined,
+} from "@ant-design/icons";
+import { IPost } from "../../../type";
 
 export default function ListItems() {
   const posts = usePostStore((state) => state.posts);
   const handleGetPosts = usePostStore((state) => state.handleGetPosts);
+  const handleDeletePost = usePostStore((state) => state.handleDeletePost);
+
+  const items = (item: IPost) => [
+    {
+      key: "delete",
+      label: (
+        <span>
+          <DeleteOutlined />
+          Delete
+        </span>
+      ),
+      onClick: () => {
+        handleDeletePost(item.id);
+      },
+    },
+    {
+      key: "edit",
+      label: (
+        <span>
+          <EditOutlined />
+          Edit
+        </span>
+      ),
+      onClick: () => {
+        console.log("edit:");
+      },
+    },
+  ];
 
   useEffect(() => {
     handleGetPosts();
@@ -18,11 +51,25 @@ export default function ListItems() {
         size="small"
         bordered
         dataSource={posts}
-        renderItem={(item) => (
-          <List.Item>
-            <div style={{ textAlign: "center", width: "100%" }}>
+        renderItem={(item: IPost) => (
+          <List.Item key={item.id}>
+            <div
+              style={{
+                width: "100%",
+              }}
+            >
               <Typography.Text strong>{item.creator}</Typography.Text>
-              <p>{item.body}</p>
+
+              <Dropdown menu={{ items: items(item) }} placement="bottom">
+                <Button
+                  size="large"
+                  type="text"
+                  style={{ borderRadius: "40px", left: "450px" }}
+                >
+                  <EllipsisOutlined style={{ fontSize: "20px" }} />
+                </Button>
+              </Dropdown>
+              <br />
 
               {item.image && (
                 <img
@@ -30,11 +77,13 @@ export default function ListItems() {
                   alt="Post"
                   style={{
                     maxWidth: "100%",
-                    maxHeight: "200px",
+                    maxHeight: "400px",
                     marginTop: "1rem",
+                    borderRadius: "15px",
                   }}
                 />
               )}
+              <p style={{ fontSize: "18px" }}>{item.body}</p>
             </div>
           </List.Item>
         )}

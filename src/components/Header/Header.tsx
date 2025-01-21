@@ -9,6 +9,8 @@ const headerStyle: React.CSSProperties = {
   alignItems: "center",
   display: "flex",
   color: "white",
+  border: "none",
+  background: "#563500",
 };
 export default function Header() {
   return (

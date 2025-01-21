@@ -7,6 +7,7 @@ interface PostStore {
   posts: IPost[];
   handleGetPosts: () => Promise<void>;
   addPost: (post: Omit<IPost, "id">) => Promise<void>;
+  handleDeletePost: (id: number) => Promise<void>;
 }
 
 const usePostStore = create<PostStore>((set) => ({
@@ -26,6 +27,15 @@ const usePostStore = create<PostStore>((set) => ({
       console.error("Error fetching posts:", error);
     }
   },
+  handleDeletePost: async (id: number) => {
+    try {
+      await axios.delete<IPost>(`http://localhost:3001/posts/${id}`);
+      await usePostStore.getState().handleGetPosts();
+    } catch (error) {
+      message.error("Error deleting");
+    }
+  },
+
   addPost: async (post) => {
     try {
       const res = await axios.post<IPost>("http://localhost:3001/posts", {

@@ -4,7 +4,7 @@ const siderStyle: React.CSSProperties = {
   textAlign: "center",
   lineHeight: "120px",
   color: "#fff",
-  backgroundColor: "#1677ff",
+  backgroundColor: "#E3BC9A ",
 };
 export default function LeftSider() {
   return <Layout.Sider style={siderStyle}>Left Side </Layout.Sider>;
