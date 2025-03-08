@@ -9,6 +9,8 @@ const contentStyle: React.CSSProperties = {
   lineHeight: "120px",
   color: "#fff",
   padding: "1rem",
+  paddingTop: "80px",
+  backgroundColor: "#E2E1DF",
 };
 
 function Posts() {

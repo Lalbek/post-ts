@@ -4,9 +4,9 @@ const siderStyle: React.CSSProperties = {
   textAlign: "center",
   lineHeight: "120px",
   color: "#fff",
-  backgroundColor: "#E3BC9A ",
-  border: "none",
+  background: "linear-gradient(to right, #000428, #004e92)",
+  paddingTop: "80px",
 };
 export default function RightSider() {
-  return <Layout.Sider style={siderStyle}>Right Side </Layout.Sider>;
+  return <Layout.Sider style={siderStyle}>RightSider</Layout.Sider>;
 }

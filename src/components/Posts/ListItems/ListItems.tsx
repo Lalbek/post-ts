@@ -1,4 +1,4 @@
-import { Button, Divider, Dropdown, List, Typography } from "antd";
+import { Button, Divider, Dropdown, List, Tooltip, Typography } from "antd";
 import { useEffect } from "react";
 import usePostStore from "../../PostStore/usePostStore";
 import {
@@ -18,8 +18,9 @@ export default function ListItems() {
       key: "delete",
       label: (
         <span>
-          <DeleteOutlined />
-          Delete
+          <Tooltip title="Delete" placement="right">
+            <DeleteOutlined />
+          </Tooltip>
         </span>
       ),
       onClick: () => {
@@ -30,13 +31,12 @@ export default function ListItems() {
       key: "edit",
       label: (
         <span>
-          <EditOutlined />
-          Edit
+          <Tooltip title="Edit" placement="right">
+            <EditOutlined />
+          </Tooltip>
         </span>
       ),
-      onClick: () => {
-        console.log("edit:");
-      },
+      onClick: () => {},
     },
   ];
 

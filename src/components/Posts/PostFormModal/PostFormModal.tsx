@@ -30,12 +30,11 @@ export default function PostFormModal() {
 
   const handlePreview = async (e: any) => {
     const imageBase64 = (await convertToBase64(e.file.originFileObj)) as string;
-    console.log("file ", imageBase64);
+    // console.log("file ", imageBase64);
     setPreviewImage(imageBase64);
   };
 
   const onFinish: FormProps<Formdata>["onFinish"] = async (values) => {
-    console.log("values ", values);
     values.image = previewImage;
     await addPost(values);
     setIsModalOpen(false);

@@ -9,14 +9,13 @@ interface PostStore {
   addPost: (post: Omit<IPost, "id">) => Promise<void>;
   handleDeletePost: (id: number) => Promise<void>;
 }
+const apiUrl = process.env.REACT_APP_API_KEY;
 
 const usePostStore = create<PostStore>((set) => ({
   posts: [],
   handleGetPosts: async () => {
     try {
-      const res = await axios.get<IPost[]>(
-        "http://localhost:3001/posts?_sort=updatedAt"
-      );
+      const res = await axios.get<IPost[]>(`${apiUrl}?_sort=updatedAt`);
       const sortedPosts = res.data.sort(
         (a, b) =>
           new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
@@ -29,7 +28,7 @@ const usePostStore = create<PostStore>((set) => ({
   },
   handleDeletePost: async (id: number) => {
     try {
-      await axios.delete<IPost>(`http://localhost:3001/posts/${id}`);
+      await axios.delete<IPost>(`${apiUrl}/${id}`);
       await usePostStore.getState().handleGetPosts();
     } catch (error) {
       message.error("Error deleting");
@@ -38,7 +37,7 @@ const usePostStore = create<PostStore>((set) => ({
 
   addPost: async (post) => {
     try {
-      const res = await axios.post<IPost>("http://localhost:3001/posts", {
+      const res = await axios.post<IPost>(`${apiUrl}`, {
         ...post,
         updatedAt: new Date().toISOString(),
       });
